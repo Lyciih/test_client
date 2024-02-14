@@ -9,7 +9,7 @@ all: test_client
 -include $(DEPS) #這行如果放在 all 之前，修改.h檔後，不會偵測到改變
 
 test_client: $(OBJS)
-	gcc $(CFLAG) -o $@ $^ 
+	gcc $(CFLAG) -o $@ $^ -pthread 
 
 obj/%.o: src/%.c
 	gcc $(CFLAG) -c $< -o $@
