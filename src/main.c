@@ -20,7 +20,7 @@ void* receiveThread(void* arg){
 
 	while(1){
 		if(recv(thread_arg->connect_fd, buffer, sizeof(buffer), 0) != 0){
-			printf("message from server : %s\n", buffer);
+			printf("message from server : %s", buffer);
 		}
 		else{
 			pthread_cancel(thread_arg->sendThreadID);
