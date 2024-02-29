@@ -14,7 +14,7 @@ else
 	tmux split-window -h -p 50 -t $work_SESSION:0
 	tmux send-keys -t $work_SESSION:0 'cd ..&&clear' C-m 
 fi
-tmux attach -t $work_SESSION:work
+tmux attach -t $work_SESSION:test_client
 
 
 

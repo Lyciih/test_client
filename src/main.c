@@ -16,11 +16,22 @@ typedef struct {
 
 void* receiveThread(void* arg){
 	thread_arg_t *thread_arg = (thread_arg_t *)arg;
-	char buffer[thread_arg->buffer_size];
+	char receive_buffer[thread_arg->buffer_size];
 
 	while(1){
-		if(recv(thread_arg->connect_fd, buffer, sizeof(buffer), 0) != 0){
-			printf("message from server : %s", buffer);
+		if(recv(thread_arg->connect_fd, receive_buffer, sizeof(receive_buffer), 0) != 0){
+		
+
+
+			receive_buffer[strcspn(receive_buffer, "\n")] = '\0';
+			receive_buffer[strcspn(receive_buffer, "\r")] = '\0';
+
+			if(strcmp(receive_buffer, "test") == 0){
+				send(thread_arg->connect_fd, "ready", sizeof("ready"), 0);
+			}
+			else{
+				printf("message from server : %s\n", receive_buffer);
+			}
 		}
 		else{
 			pthread_cancel(thread_arg->sendThreadID);
